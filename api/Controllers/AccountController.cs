@@ -5,11 +5,14 @@ using api.DTOs;
 using api.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace api.Controllers;
 
     public class AccountController(DataContext context) : BaseApiController
     {
+        
         [HttpPost("register")]
         public async Task<ActionResult<AppUser>> RegisterAsync(RegisterRequest register)
         {

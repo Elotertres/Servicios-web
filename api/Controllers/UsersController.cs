@@ -3,10 +3,12 @@ using api.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace api.Controllers;
 [ApiController]
-
+[Authorize]
 public class UsersController : BaseApiController
 {
     private readonly DataContext _context;
@@ -18,6 +20,8 @@ public class UsersController : BaseApiController
 
 
     [HttpGet]
+    [AllowAnonymous]
+
     public async Task<ActionResult <IEnumerable<AppUser>>> GetUsersAsync()
     {
         var users = await _context.Users.ToListAsync();
