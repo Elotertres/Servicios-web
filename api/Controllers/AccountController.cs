@@ -13,13 +13,11 @@ namespace api.Controllers;
         [HttpPost("register")]
         public async Task<ActionResult<AppUser>> RegisterAsync(RegisterRequest register)
         {
-            //if (await UserExistAsync(Request.username)){ 
-               // BadRequest("Username alredy in use");
-           // }    
+             
             using var hmac = new HMACSHA512();
             var user = new AppUser(){
 
-            UserName = register.UserName,
+            UserName = register.Username,
             passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(register.Password)),
             passwordSalt = hmac.Key
             };
