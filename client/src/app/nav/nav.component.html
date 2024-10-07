@@ -3,7 +3,8 @@
         <a class="navbar-brand" href="#">Dating App</a>
  
         
-        @if (loggedIn){
+        @if (accountService.currentUser()){
+
             <div class="dropdown">
                 <a dropdownToggle class="dropdown-togle text-ligth">Welcome user</a>
                 <div *dropdownMenu class="dropdown-menu">
@@ -15,7 +16,8 @@
         <!-- 
         One way binding
         -->
-        @if (!loggedIn){
+        @if (accountService.currentUser()){
+
         <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex" autocomplete="off">
             <input name="username" [(ngModel)]="model.username" class="form-control me-2" placeholder="Username">
             <input name="password" [(ngModel)]="model.password" class="form-control me-2" placeholder="Password" type="password">
