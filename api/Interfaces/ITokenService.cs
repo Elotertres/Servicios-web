@@ -1,4 +1,4 @@
-using api.Entities;
+using api.DataEntities;
 namespace api.Interfaces;
 public interface ITokenService
 {
