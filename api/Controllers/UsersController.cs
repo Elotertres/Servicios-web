@@ -6,6 +6,8 @@ using API.Data;
 using API.DataEntities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using API.DTOs;
+
 
 
 [Authorize]
@@ -20,14 +22,14 @@ public class UsersController : BaseApiController
     }
 
     [HttpGet] // api/users
-    public async Task<ActionResult<IEnumerable<AppUser>>> GetUsersAsync()
+    public async Task<ActionResult<IEnumerable<MemberResponse>>> GetAllAsync()
     {
         var users = await _repository.GetAllAsync();
         return Ok(users);
     }
 
     [HttpGet("{id:int}")]// api/users/2
-    public async Task<ActionResult<AppUser>> GetByIdAsync(int id)
+    public async Task<ActionResult<MemberResponse>> GetByIdAsync(int id)
     {
         var user = await _repository.GetByIdAsync(id);
 
@@ -40,7 +42,7 @@ public class UsersController : BaseApiController
     }
 
     [HttpGet("{username}")] // api/users/Patricio
-    public async Task<ActionResult<AppUser>> GetByUsernameAsync(string username)
+    public async Task<ActionResult<MemberResponse>> GetByUsernameAsync(string username)
     {
         var user = await _repository.GetByUsernameAsync(username);
 
