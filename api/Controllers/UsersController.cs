@@ -1,13 +1,10 @@
 namespace API.Controllers;
-
-using api.Controllers;
-using api.Entities;
 using API.Data;
 using API.DataEntities;
+using API.DTOs;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using API.DTOs;
-
 
 
 [Authorize]
@@ -15,42 +12,47 @@ public class UsersController : BaseApiController
 {
 
     private readonly IUserRepository _repository;
+    private readonly IMapper _mapper;
 
-    public UsersController(UserRepository repository)
+    public UsersController(IUserRepository repository, IMapper mapper)
     {
         _repository = repository;
+        _mapper = mapper;
     }
 
-    [HttpGet] // api/users
+    [HttpGet]
     public async Task<ActionResult<IEnumerable<MemberResponse>>> GetAllAsync()
     {
         var users = await _repository.GetAllAsync();
-        return Ok(users);
+
+        var response = _mapper.Map<IEnumerable<MemberResponse>>(users);
+
+        return Ok(response);
     }
 
-    [HttpGet("{id:int}")]// api/users/2
+    [HttpGet("{id:int}")]
     public async Task<ActionResult<MemberResponse>> GetByIdAsync(int id)
     {
         var user = await _repository.GetByIdAsync(id);
 
-        if (User == null)
+        if (user == null)
         {
             return NotFound();
         }
 
-        return user;
+        return _mapper.Map<MemberResponse>(user);
     }
 
-    [HttpGet("{username}")] // api/users/Patricio
+    [HttpGet("{username}")]
     public async Task<ActionResult<MemberResponse>> GetByUsernameAsync(string username)
     {
         var user = await _repository.GetByUsernameAsync(username);
 
-        if (User == null)
+        if (user == null)
         {
             return NotFound();
         }
 
-        return user;
+        return _mapper.Map<MemberResponse>(user);
     }
 }
