@@ -8,8 +8,8 @@ import { MemberCardComponent } from "../member-card/member-card.component";
   standalone: true,
 
   imports: [MemberCardComponent,MemberCardComponent],
-  templateUrl: './member-list.component.html',
-  styleUrl: './member-list.component.css'
+  templateUrl: './members-list.component.html',
+  styleUrl: './members-list.component.css'
 })
 
 export class MemberListComponent implements OnInit{
