@@ -382,6 +382,10 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
+*.db
+coveragereport
+TestResult
+
 # VS Code files for those working on multiple tools
 .vscode/*
 !.vscode/settings.json
